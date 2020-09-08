@@ -1,0 +1,252 @@
+{
+	"name": "CopyPipeline_0cs",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_0cs",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Destination",
+						"value": "testcontainer//Testfile1"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage2",
+							"type": "LinkedServiceReference"
+						},
+						"path": "test2"
+					},
+					"enableSkipIncompatibleRow": true,
+					"logStorageSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage2",
+							"type": "LinkedServiceReference"
+						},
+						"path": "test2"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['Country']"
+								},
+								"sink": {
+									"name": "Country",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['CountryCode']"
+								},
+								"sink": {
+									"name": "CountryCode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Province']"
+								},
+								"sink": {
+									"name": "Province",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['City']"
+								},
+								"sink": {
+									"name": "City",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['CityCode']"
+								},
+								"sink": {
+									"name": "CityCode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Lat']"
+								},
+								"sink": {
+									"name": "Lat",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Lon']"
+								},
+								"sink": {
+									"name": "Lon",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Confirmed']"
+								},
+								"sink": {
+									"name": "Confirmed",
+									"type": "Int16"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Deaths']"
+								},
+								"sink": {
+									"name": "Deaths",
+									"type": "Int16"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Recovered']"
+								},
+								"sink": {
+									"name": "Recovered",
+									"type": "Int16"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Active']"
+								},
+								"sink": {
+									"name": "Active",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Date']"
+								},
+								"sink": {
+									"name": "Date",
+									"type": "DateTime"
+								}
+							}
+						],
+						"mapComplexValuesToString": false
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_0cs",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_0cs",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy_0cs",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureTableSink",
+						"azureTableInsertType": "merge",
+						"writeBatchSize": 10000
+					},
+					"enableStaging": false,
+					"dataIntegrationUnits": 2,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DestinationDataset_0cs",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "CovidTable",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2020-09-07T15:25:23Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

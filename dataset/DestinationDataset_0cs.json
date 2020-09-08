@@ -1,0 +1,73 @@
+{
+	"name": "DestinationDataset_0cs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Testfile1",
+				"container": "testcontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Country",
+				"type": "String"
+			},
+			{
+				"name": "CountryCode",
+				"type": "String"
+			},
+			{
+				"name": "Province",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "CityCode",
+				"type": "String"
+			},
+			{
+				"name": "Lat",
+				"type": "String"
+			},
+			{
+				"name": "Lon",
+				"type": "String"
+			},
+			{
+				"name": "Confirmed",
+				"type": "String"
+			},
+			{
+				"name": "Deaths",
+				"type": "String"
+			},
+			{
+				"name": "Recovered",
+				"type": "String"
+			},
+			{
+				"name": "Active",
+				"type": "String"
+			},
+			{
+				"name": "Date",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

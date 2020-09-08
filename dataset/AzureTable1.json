@@ -1,0 +1,16 @@
+{
+	"name": "AzureTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LegoTable",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "LegoTable"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

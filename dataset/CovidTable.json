@@ -1,0 +1,16 @@
+{
+	"name": "CovidTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CovidTable",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "Covid"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,58 @@
+{
+	"name": "SourceDataset_0cs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HttpServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"Country": {
+					"type": "string"
+				},
+				"CountryCode": {
+					"type": "string"
+				},
+				"Province": {
+					"type": "string"
+				},
+				"City": {
+					"type": "string"
+				},
+				"CityCode": {
+					"type": "string"
+				},
+				"Lat": {
+					"type": "string"
+				},
+				"Lon": {
+					"type": "string"
+				},
+				"Confirmed": {
+					"type": "integer"
+				},
+				"Deaths": {
+					"type": "integer"
+				},
+				"Recovered": {
+					"type": "integer"
+				},
+				"Active": {
+					"type": "integer"
+				},
+				"Date": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
